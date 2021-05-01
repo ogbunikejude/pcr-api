@@ -1,6 +1,6 @@
-const User = require('../model/user.model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const User = require('../model/user.model')
 const { handleAsync, ErrorHandler } = require('../utils/errorHandler')
 const {
   validateAddUser,

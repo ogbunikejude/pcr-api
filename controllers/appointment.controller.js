@@ -1,8 +1,7 @@
 const Appointment = require('../model/appointment.model')
-const Patient = require('../model/patient.model')
 const sendEmail = require('../services/email.services')
 const createPatientAppointmentTemplate = require('../templates/patientAppointment')
-const { handleAsync, ErrorHandler } = require('../utils/errorHandler')
+const { handleAsync } = require('../utils/errorHandler')
 const { validateAppointment } = require('../validations/appointment.validation')
 
 const addAppointment = handleAsync(async (req, res) => {
@@ -17,9 +16,14 @@ const addAppointment = handleAsync(async (req, res) => {
     createPatientAppointmentTemplate(data.firstName, data.date, data.time)
   )
 
-  appointment = await Appointment.create(data)
-})
+  const appointment = await Appointment.create(data)
 
+  res.status(200).json({
+    status: 'success',
+    message: 'Patient appointments successfully added',
+    data: appointment,
+  })
+})
 const getAppointments = handleAsync(async (req, res) => {
   const { page = 1, limit = 10 } = req.query
   const appointment = await Appointment.find()
@@ -55,6 +59,7 @@ const deleteAppointment = handleAsync(async (req, res) => {
     data: null,
   })
 })
+
 const updateAppointment = handleAsync(async (req, res) => {
   const { id } = req.params
   const data = req.body
@@ -68,10 +73,11 @@ const updateAppointment = handleAsync(async (req, res) => {
     data: appointment,
   })
 })
+
 module.exports = {
+  updateAppointment,
   addAppointment,
   getAppointments,
   getAppointment,
   deleteAppointment,
-  updateAppointment,
 }

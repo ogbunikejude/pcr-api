@@ -1,5 +1,5 @@
+/* eslint-disable prefer-destructuring */
 const Patient = require('../model/patient.model')
-const User = require('../model/user.model')
 const { handleAsync, ErrorHandler } = require('../utils/errorHandler')
 const {
   validateAddPatient,
@@ -79,11 +79,12 @@ const updatePatientCondition = handleAsync(async (req, res) => {
   const { id } = req.params
   const data = req.body
 
+  // eslint-disable-next-line prefer-destructuring
   const condition = data.condition
   const medication = data.medication
   const allergies = data.allergies
   const dateDiagnosed = data.dateDiagnosed
-  let patientCondition = {
+  const patientCondition = {
     condition,
     medication,
     allergies,
