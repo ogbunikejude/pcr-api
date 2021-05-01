@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon app.js",
+    "start": "nodemon app.js",
     "format": "prettier --config .prettierrc ./**/*.js --write"
   },
   "dependencies": {
