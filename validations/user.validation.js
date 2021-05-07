@@ -5,14 +5,16 @@ const validateAddUser = async (data) => {
   const Schema = Joi.object({
     firstName: Joi.string().required(),
     lastName: Joi.string().required(),
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    password: Joi.string()
+      .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+      .required(),
     email: Joi.string()
       .email({
         minDomainSegments: 2,
         tlds: { allow: ['com', 'net'] },
       })
       .required(),
-    phoneNumber: Joi.number().min(11).required(),
+    phoneNumber: Joi.string().min(11).required(),
     address: Joi.string().required(),
     profilePicture: Joi.object({
       id: Joi.string().required(),

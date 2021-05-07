@@ -1,9 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 require('dotenv').config()
 
-//Routes
+// Routes
 const userRouter = require('./routes/user.routes')
 const uploadRouter = require('./routes/upload.routes')
 const patientRouter = require('./routes/patient.routes')
@@ -13,6 +14,7 @@ const { handleError } = require('./utils/errorHandler')
 
 const app = express()
 const PORT = process.env.PORT || 8000
+app.use(cors())
 app.use(express.json())
 app.use('/user', userRouter)
 app.use('/patient', patientRouter)
